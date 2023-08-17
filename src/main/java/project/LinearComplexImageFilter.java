@@ -4,7 +4,7 @@ import mt.Image;
 import mt.LinearImageFilter;
 
 public class LinearComplexImageFilter {
-    LinearImageFilter filter;
+    protected LinearImageFilter filter;
     public LinearComplexImageFilter(LinearImageFilter filter) {
         this.filter = filter;
     }

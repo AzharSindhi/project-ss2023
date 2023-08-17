@@ -45,11 +45,11 @@ public class ComplexImage {
         Image magnitudeImg = new Image(width, height, "magnitudeImg");
         for (int h=0; h<height; h++) {
             for (int w=0; w<width; w++) {
-                float real = this.real.atIndex(w, h);
-                float imag = this.imag.atIndex(w, h);
+                float real = this.real.atIndex(h, w);
+                float imag = this.imag.atIndex(h, w);
                 float mag = (float) Math.sqrt(real * real + imag * imag);
                 if (logFlag) {mag = (float) Math.log(mag);}                
-                magnitudeImg.setAtIndex(w, h, mag); 
+                magnitudeImg.setAtIndex(h, w, mag);
             }
         }
         return magnitudeImg;
@@ -58,15 +58,15 @@ public class ComplexImage {
         Image phaseImg = new Image(width, height, "PhaseImg");
         for (int h=0; h<height; h++) {
             for (int w=0; w<width; w++) {
-                double real = (double) this.real.atIndex(w, h);
-                double imag = (double) this.real.atIndex(w, h);
+                double real = (double) this.real.atIndex(h, w);
+                double imag = (double) this.imag.atIndex(h, w);
                 float value = (float) Math.atan2(real, imag);
-                phaseImg.setAtIndex(w, h, value); 
+                phaseImg.setAtIndex(h, w, value);
             }
         }
         return phaseImg;
     }
-    private Image swap (Image input, int startCol , int swapColOffset) {
+    private void Swap (Image input, int startCol , int swapColOffset) {
         int w = input.width();
         int h = input.height();
         int rowOffset = h/2; // always same in our case
@@ -79,13 +79,12 @@ public class ComplexImage {
                 input.setAtIndex(i + rowOffset, j+swapColOffset, matValue);
             }
         }
-        return input;
     }
     private Image swapQuadrants(Image input){
         int w = input.width();
         int h = input.height();
-        swap(input, 0, w / 2);
-        swap(input, w / 2, -w / 2);
+        Swap(input, 0, w / 2);
+        Swap(input, w / 2, -w / 2);
         return input;
     }
 
