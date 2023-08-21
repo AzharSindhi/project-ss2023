@@ -34,7 +34,7 @@ public class Project {
         // Task 2.3 - Images and magnitudes of KSpace
 
         DisplayUtils.showImage(kSpace.getMagnitude(), "KSpace_Magnitude", kSpace.getWidth());
-//        DisplayUtils.showImage(kSpace.getLogMagnitude(), "KSpace_Magnitude - Log", kSpace.getWidth());
+        DisplayUtils.showImage(kSpace.getLogMagnitude(), "KSpace_Magnitude - Log", kSpace.getWidth());
         DisplayUtils.showImage(kSpace.getPhase(), "KSpace_Phase", kSpace.getWidth());
         kSpace.getReal().show();
         kSpace.getImag().show();
@@ -69,14 +69,15 @@ public class Project {
         // Task 3.4 - Reconstructing MR image and KSpace
 
         kSpace = ProjectHelpers.LoadKSpace("kdata.h5");
+        DisplayUtils.showImage(kSpace.getLogMagnitude(), "KSpace Log Mag- Orig", kSpace.getWidth());
         ComplexImage reImage = kSpace2Image(kSpace);
         DisplayUtils.showImage(reImage.getMagnitude(), "Reconstructed Image", reImage.getWidth());
         DisplayUtils.showImage(reImage.getPhase(), "Reconstructed Image Phase", reImage.getWidth());
         DisplayUtils.showImage(reImage.getReal().buffer(), "Reconstructed Image Real", reImage.getWidth());
         DisplayUtils.showImage(reImage.getImag().buffer(), "Reconstructed Image Imag", reImage.getWidth());
         ComplexImage kSpaceReconstructed = Image2kSpace(reImage);
-        DisplayUtils.showImage(kSpace.getLogMagnitude(), "KSpace Log Mag- Orig", kSpace.getWidth());
         DisplayUtils.showImage(kSpaceReconstructed.getLogMagnitude(), "KSpace Log Mag- Reconstructed", kSpace.getWidth());
+        DisplayUtils.showImage(kSpaceReconstructed.getPhase(), "KSpace phase- Reconstructed", kSpace.getWidth());
 
         // filters
         // Task 4.1.1 - Sinc Filter
